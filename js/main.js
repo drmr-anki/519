@@ -7,9 +7,34 @@ function selectCountry(country){
 	var clubs = ['Beijing','Shanghai','Najing','Shandong'];
 
 	document.getElementById('club').innerHTML = writeClubButton(clubs);
+	var path ="tempCSLData.json"
+	var data = readJSON(path);
+	console.log(data);
+	// console.log("hhhh");
 
 }
 
+function readJSON(path) {
+		var data;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+          var file = new File([this.response], 'temp');
+          var fileReader = new FileReader();
+          fileReader.addEventListener('load', function(){
+               //do stuff with fileReader.result
+							 console.log(fileReader.result.data);
+							 // data = fileReader.result;
+							 // console.log("hhhh");
+          });
+          fileReader.readAsText(file);
+      }
+    }
+    xhr.send();
+		return data;
+}
 
 function writeClubButton(clubs){
     // caution: drop the "new Array" part or it won't work!
@@ -56,30 +81,3 @@ function writeClubButton(clubs){
 //
 //
 // ExcelToJSON();
-
-
-var url = "tempCSLData.xlsx";
-var oReq = new XMLHttpRequest();
-oReq.open("GET", url, true);
-oReq.responseType = "arraybuffer";
-
-oReq.onload = function(e) {
-  var arraybuffer = oReq.response;
-
-  /* convert data to binary string */
-  var data = new Uint8Array(arraybuffer);
-  var arr = new Array();
-  for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-  var bstr = arr.join("");
-
-  /* Call XLSX */
-  var workbook = XLSX.read(bstr, {type:"binary"});
-
-  /* DO SOMETHING WITH workbook HERE */
-  var first_sheet_name = workbook.SheetNames[0];
-  /* Get worksheet */
-  var worksheet = workbook.Sheets[first_sheet_name];
-  console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-}
-
-oReq.send();
