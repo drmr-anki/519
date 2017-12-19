@@ -1,14 +1,14 @@
 var data_global;
 var clubs;
 
-function selectCountry(country){
+function handleSingleClub(country){
 	// alert(country)
 
 	document.getElementById('country').innerHTML = country;
 
 	//find the clubs in that country and replace this array
-
 	var path ="tempCSLData.json"
+
 
 	readJSON(path).then((data) => {
 		var response = JSON.parse(data)
@@ -25,9 +25,6 @@ function selectCountry(country){
 	})
 
 	// console.log(data_global);
-
-
-
 
 }
 
@@ -50,26 +47,6 @@ function readJSON(path) {
     var xhr = new XMLHttpRequest();
 		// xhr.overrideMimeType("application/json")
     xhr.open('GET', path, true);
-
-		// () => {
-    //   if (this.status == 200) {
-    //       // var file = new File([this.response], 'temp');
-    //       // var fileReader = new FileReader();
-    //       // fileReader.addEventListener('load', function(){
-    //       //      //do stuff with fileReader.result
-		// 			// 		 console.log(fileReader.result);
-		// 			// 		 // data = fileReader.result;
-		// 			// 		 // console.log("hhhh");
-    //       // });
-    //       // fileReader.readAsText(file);
-		// 			var response = JSON.parse(this.responseText);
-		// 			// console.log(data.data);
-		// 			var data = response.data;
-		// 			// console.log(data);
-		// 	    // data_global = data;
-		// 			return data
-		// 		}
-    // xhr.responseType = 'blob'
     xhr.onload = () => resolve(xhr.responseText)
 		xhr.onerror = () => reject(xhr.statusText)
 		xhr.send();
@@ -81,7 +58,7 @@ function readJSON(path) {
 function writeClubButton(clubs){
     // caution: drop the "new Array" part or it won't work!
 
-    var printThis = "";
+    var printThis = "<h2>Select A Club</h2>";
     for(var i = 0; i < clubs.length; i++){
         printThis += '<button class="ui blue basic button" value ="'+clubs[i]+'" onclick = "readClubData(value)">'+clubs[i]+'</button> ';
 
@@ -134,40 +111,129 @@ function readClubData(club){
 	console.log(Season);
 
 
-	drawChart(radarData, radarDataPrev,Season, costData, rankData);
+	drawChartSingle(radarData, radarDataPrev,Season, costData, rankData);
 }
 
 
-// var ExcelToJSON = function() {
-// 	var file = "tempCSLData.xlsx";
-//   this.parseExcel = function(file) {
-//     var reader = new FileReader();
-//
-//     reader.onload = function(e) {
-//       var data = e.target.result();
-//       var workbook = XLSX.read(data, {
-//         type: 'binary'
-//
-//       });
-// 			// console.log("hhhhi");
-// 			var sheetName = "tempCSLData"
-//       workbook.SheetNames.forEach(function(sheetName) {
-//         // Here is your object
-//         var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-//         var json_object = JSON.stringify(XL_row_object);
-//         console.log(json_object);
-//
-//       })
-//
-//     };
-//
-//     reader.onerror = function(ex) {
-//       console.log(ex);
-//     };
-//
-//     reader.readAsBinaryString(file);
-//   };
-// };
-//
-//
-// ExcelToJSON();
+// *******************************Draw charts for comparison************************
+
+function handleCompare(country){
+	// alert(country)
+	let main = document.getElementById("main");
+	let existInstance = echarts.getInstanceByDom(main);
+	if (existInstance) {
+    if (true) {
+        echarts.dispose(existInstance);
+    }
+	}
+	//find the clubs in that country and replace this array
+	var path ="tempCSLData.json"
+
+	readJSON(path).then((data) => {
+		var response = JSON.parse(data)
+		var data = response.data
+		data_global = data
+    //
+		console.log(data_global)
+		clubs = readUniqueClubs(data)
+		console.log(clubs);
+		// console.log("hhhh");
+		//var clubs = ['Beijing','Shanghai','Najing','Shandong'];
+
+		document.getElementById('club').innerHTML = writeSelectBox(Array.from(clubs));
+	})
+
+	// console.log(data_global);
+
+}
+
+function writeSelectBox(clubs){
+  	// caution: drop the "new Array" part or it won't work!
+    var printThis = '<h2>Select Two Clubs</h2>';
+		printThis+='<div class="ui form">';
+		printThis+='<div class="two fields">';
+
+		//Draw select feild for first country
+		printThis+='<div class="field">'
+    printThis+='<label>Country One</label>'
+    printThis+='<select id = "c1" class="ui fluid dropdown">';
+		printThis+='<option value="">Country One</option>';
+    for(var i = 0; i < clubs.length; i++){
+        printThis += '<option value ="'+clubs[i]+'">'+clubs[i]+'</option> ';
+    }
+
+		printThis += '</select></div>'
+
+		//Draw select feild for second country
+		printThis+='<div class="field">'
+    printThis+='<label>Country Two</label>'
+    printThis+='<select id = "c2" class="ui fluid dropdown">';
+		printThis+='<option value="">Country Two</option>';
+    for(var i = 0; i < clubs.length; i++){
+        printThis += '<option value ="'+clubs[i]+'">'+clubs[i]+'</option> ';
+    }
+
+		printThis += '</select></div></div>';
+		printThis += '<div class="ui button" onclick ="compare()" >Show Graph</div>';
+		return printThis;
+
+}
+
+function compare(){
+	var c1= document.getElementById("c1").value;
+	var c2= document.getElementById("c2").value;
+	var c1_data = [];
+	var c2_data = [];
+	var count1 = 0;
+	var count2 = 0;
+
+	for(var i = 0; i < data_global.length; i++){
+		if(new String(data_global[i].Club).valueOf() == new String(c1).valueOf()){
+			c1_data[count1] = data_global[i];
+			count1++;
+		}
+
+		if(new String(data_global[i].Club).valueOf() == new String(c2).valueOf()){
+			c2_data[count2] = data_global[i];
+			count2++;
+		// console.log(data_global[i]);
+	}
+}
+
+	// club_data.reverse();
+	console.log(c1_data);
+	console.log(c2_data);
+
+	var DataC1 = [];
+	var DataC2= [];
+
+	for(var i = 0; i < c1_data.length; i++){
+			var rank;
+			var cost;
+
+			if(c1_data[i].Rank == -1){
+				rank = 17;
+			}else{
+				rank = c1_data[i].Rank;
+			}
+			cost = c1_data[i].Transfer_Arrival-c1_data[i].Transfer_Departure;
+
+			DataC1.unshift([c1_data[i].GA,c1_data[i].GS,c1_data[i].Passing,c1_data[i].Points,c1_data[i].Possession, c1_data[i].Shooting, cost,rank]);
+
+			if(c2_data[i].Rank == -1){
+				rank = 17;
+			}else{
+				rank = c2_data[i].Rank;
+			}
+			cost = c2_data[i].Transfer_Arrival-c1_data[i].Transfer_Departure;
+			DataC2.unshift([c2_data[i].GA,c2_data[i].GS,c2_data[i].Passing,c2_data[i].Points,c2_data[i].Possession, c2_data[i].Shooting, cost,rank]);
+
+	}
+	// console.log(radarData);
+	// console.log(Season);
+  //
+  //
+	drawChartCompare(DataC1,DataC2, [c1, c2]);
+
+
+}

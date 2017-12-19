@@ -1,4 +1,4 @@
-function drawChart(radarData, radarDataPrev, Season, costData, rankData){
+function drawChartSingle(radarData, radarDataPrev, Season, costData, rankData){
 	let main = document.getElementById("main");
 	let existInstance = echarts.getInstanceByDom(main);
 	if (existInstance) {
@@ -14,7 +14,7 @@ function drawChart(radarData, radarDataPrev, Season, costData, rankData){
 	// var Season = ["10/11","11/12","12/13","13/14","14/15","15/16","16/17"];
 	// var radarData = [];
 	var radarDataPrev = radarData;
-	var maxDataSingle = 25;
+	var maxDataSingle = 30;
 	var maxData = [maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle];
 	// var costData = [355,280,801,2693,550,1783,2899];
 	// var rankData =[];
@@ -464,6 +464,5 @@ function drawChart(radarData, radarDataPrev, Season, costData, rankData){
 	});
 	// Pass value to chart
 	myChart.setOption(option);
-
 
 }

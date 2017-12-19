@@ -27,6 +27,9 @@
 								<h1 class="animate-box" style = "color: white; text-align: center" data-animate-effect="fadeInUp">We Love Soccer !</h1>
 								<h2 class="animate-box" data-animate-effect="fadeInUp">Visualize Your Clubs Here</a></h2>
 								<p class="animate-box" data-animate-effect="fadeInUp">Get In Touch</a></p>
+
+
+
 							</div>
 						</div>
 					</div>
@@ -36,10 +39,10 @@
 		<br>
 		<div class="ui center aligned container">
 			<h2 class="animate-box" data-animate-effect="fadeInUp">Visualize Your Clubs Here</a></h2>
-			<div class="ui massive three item menu">
-			  <a class="item" id="CN" onclick="selectCountry(this.id)">China</a>
-			  <a class="item" id="US" onclick="selectCountry(this.id)">United States</a>
-			  <a class="item" id="UK" onclick="selectCountry(this.id)">United Kingdom</a>
+			<div class="ui massive two item menu">
+			  <a class="item" id="CN" onclick="handleSingleClub(this.id)">Single Club</a>
+			  <a class="item" id="US" onclick="handleCompare(this.id)">Compare</a>
+			  <!-- <a class="item" id="UK" onclick="selectCountry(this.id)">United Kingdom</a> -->
 			</div>
 		</div>
 
@@ -60,7 +63,7 @@
 			  <div style = "text-align: center"class="selected-item">
 					<br>
 			    <h2 >You Selected Country : <span id = "country"></span></h2>
-					<h2>Select A Club</h2>
+
 					<div id = "club"> <div>
 					<!-- <p id = "club"> <span></span></p> -->
 					<!-- <button class="ui red basic button" id = "club">Red</button> -->
@@ -97,6 +100,7 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 	<script src="js/chart.js"></script>
+	<script src="js/chartCompare.js"></script>
 
 
 

@@ -1,5 +1,5 @@
 
-TITLE: 
+TITLE:
 Aesthetic - 100% Fully Responsive Free HTML5 Bootstrap Template
 
 AUTHOR:
@@ -51,3 +51,7 @@ http://dimsemenov.com/plugins/magnific-popup/
 Demo Images:
 http://unsplash.com
 
+
+Build Server:
+npm install http-server -g
+http-server <dir>
