@@ -18583,7 +18583,7 @@ var globalDefault = {
     // color: ['#bcd3bb', '#e88f70', '#edc1a5', '#9dc5c8', '#e1e8c8', '#7b7c68', '#e5b5b5', '#f0b489', '#928ea8', '#bda29a'],
     // color: ['#cc5664', '#9bd6ec', '#ea946e', '#8acaaa', '#f1ec64', '#ee8686', '#a48dc1', '#5da6bc', '#b9dcae'],
     // 深色
-    color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+    color: ['#f4e542','#f44441', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
 
     // 默认需要 Grid 配置项
     // grid: {},
@@ -20824,7 +20824,7 @@ var loadingDefault = function (api, opts) {
     opts = opts || {};
     defaults(opts, {
         text: 'loading',
-        color: '#c23531',
+        color: '#f4f441',
         textColor: '#000',
         maskColor: 'rgba(255, 255, 255, 0.8)',
         zlevel: 0
@@ -37864,7 +37864,7 @@ SeriesModel.extend({
         itemStyle: {
             normal: {
                 color: 'lightsteelblue',
-                borderColor: '#c23531',
+                borderColor: '#f4f441',
                 borderWidth: 1.5
             }
         },
@@ -44204,7 +44204,7 @@ var GaugeSeries = SeriesModel.extend({
             // 默认显示，属性show控制显示与否
             show: true,
             lineStyle: {       // 属性lineStyle控制线条样式
-                color: [[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']],
+                color: [[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#f4f441']],
                 width: 30
             }
         },
@@ -49398,12 +49398,12 @@ var CandlestickSeries = SeriesModel.extend({
 
         itemStyle: {
             normal: {
-                color: '#c23531', // 阳线 positive
-                color0: '#314656', // 阴线 negative     '#c23531', '#314656'
+                color: '#f4f441', // 阳线 positive
+                color0: '#314656', // 阴线 negative     '#f4f441', '#314656'
                 borderWidth: 1,
                 // FIXME
                 // ec2中使用的是lineStyle.color 和 lineStyle.color0
-                borderColor: '#c23531',
+                borderColor: '#f4f441',
                 borderColor0: '#314656'
             },
             emphasis: {
@@ -53292,7 +53292,7 @@ var AxisPointerModel = extendComponentModel({
             // handle margin is from symbol center to axis, which is stable when circular move.
             margin: 50,
             // color: '#1b8bbd'
-            // color: '#2f4554'
+            // color: '#f46441'
             color: '#333',
             shadowBlur: 3,
             shadowColor: '#aaa',
@@ -57023,7 +57023,7 @@ var ScrollableLegendModel = LegendModel.extend({
             horizontal: ['M0,0L12,-10L12,10z', 'M0,0L-12,-10L-12,10z'],
             vertical: ['M0,0L20,0L10,-20z', 'M0,0L20,0L10,20z']
         },
-        pageIconColor: '#2f4554',
+        pageIconColor: '#f46441',
         pageIconInactiveColor: '#aaa',
         pageIconSize: 15, // Can be [10, 3], which represents [width, height]
         pageTextStyle: {
@@ -64175,7 +64175,7 @@ var SliderZoomModel = DataZoomModel.extend({
                                                 // previous version, but not recommended any more.
         dataBackground: {
             lineStyle: {
-                color: '#2f4554',
+                color: '#f46441',
                 width: 0.5,
                 opacity: 0.3
             },
@@ -69832,7 +69832,7 @@ var SliderTimelineModel = TimelineModel.extend({
             emphasis: {
                 show: true,
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                color: '#c23531'
+                color: '#f4f441'
             }
         },
         itemStyle: {
@@ -69841,14 +69841,14 @@ var SliderTimelineModel = TimelineModel.extend({
                 borderWidth: 1
             },
             emphasis: {
-                color: '#c23531'
+                color: '#f4f441'
             }
         },
 
         checkpointStyle: {
             symbol: 'circle',
             symbolSize: 13,
-            color: '#c23531',
+            color: '#f4f441',
             borderWidth: 5,
             borderColor: 'rgba(194,53,49, 0.5)',
             animation: true,
@@ -69874,8 +69874,8 @@ var SliderTimelineModel = TimelineModel.extend({
                 borderWidth: 1
             },
             emphasis: {
-                color: '#c23531',
-                borderColor: '#c23531',
+                color: '#f4f441',
+                borderColor: '#f4f441',
                 borderWidth: 2
             }
         },
@@ -71486,7 +71486,7 @@ DataView.defaultOption = {
     textColor: '#000',
     textareaColor: '#fff',
     textareaBorderColor: '#333',
-    buttonColor: '#c23531',
+    buttonColor: '#f4f441',
     buttonTextColor: '#fff'
 };
 

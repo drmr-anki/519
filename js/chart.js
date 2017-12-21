@@ -7,34 +7,11 @@ function drawChartSingle(radarData, radarDataPrev, Season, costData, rankData){
     }
 	}
 	let myChart = echarts.init(main);
-	// echarts.init(document.getElementById('main')).dispose();
-
-	// Data
-	// Season => Year
-	// var Season = ["10/11","11/12","12/13","13/14","14/15","15/16","16/17"];
-	// var radarData = [];
-	var radarDataPrev = radarData;
+	
+	// var radarDataPrev = radarData;
 	var maxDataSingle = 30;
 	var maxData = [maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle,maxDataSingle];
-	// var costData = [355,280,801,2693,550,1783,2899];
-	// var rankData =[];
 
-	//7 years with 9 element each year
-	// radarData.unshift([49,33,330,11649,400,379]);
-	// radarData.unshift([38,45,416,12864,314,429]);
-	// radarData.unshift([66,41,426,12329,331,483]);
-	// radarData.unshift([41,29,516,11593,378,465]);
-	// radarData.unshift([55,35,466,11725,328,497]);
-	// radarData.unshift([46,43,457,11117,336,470]);
-	// radarData.unshift([37,40,377,11020,269,441]);
-
-	// radarDataPrev.unshift([38,45,416,12864,314,429]);
-	// radarDataPrev.unshift([66,41,426,12329,331,483]);
-	// radarDataPrev.unshift([41,29,516,11593,378,465]);
-	// radarDataPrev.unshift([55,35,466,11725,328,497]);
-	// radarDataPrev.unshift([46,43,457,11117,336,470]);
-	// radarDataPrev.unshift([37,40,377,11020,269,441]);
-	// radarDataPrev.unshift([40,31,407,11230,321,412]);
 
 	// Set color
 	var color = {
@@ -159,23 +136,23 @@ function drawChartSingle(radarData, radarDataPrev, Season, costData, rankData){
 		},
 		indicator: [{
 			name: 'GA',
-			max: 70
+			max: 100
 		}, {
 			name: 'GS',
-			max: 60
+			max: 100
 		}, {
 			name: 'Passing',
-			max: 600
+			max: 15000
 		}, {
 			name: 'Points',
-			max: 14000
+			max: 114
 		},{
 			name: 'Possession',
-			max: 500
+			max: 100
 
 		},{
 			name: 'Shooting',
-			max: 500
+			max: 600
 
 		}]
 	},

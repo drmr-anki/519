@@ -15,9 +15,9 @@ function handleSingleClub(country){
 		var data = response.data
 		data_global = data
     //
-		console.log(data_global)
+		// console.log(data_global)
 		clubs = readUniqueClubs(data)
-		console.log(clubs);
+		// console.log(clubs);
 		// console.log("hhhh");
 		//var clubs = ['Beijing','Shanghai','Najing','Shandong'];
 
@@ -71,19 +71,16 @@ function readClubData(club){
 	var club_data = [];
 	let count = 0;
 
-	console.log(club);
+	// console.log(club);
 	//Find the data for club and call drawChart
 	for(var i = 0; i < data_global.length; i++){
 		if(new String(data_global[i].Club).valueOf() == new String(club).valueOf()){
 			club_data[count] = data_global[i];
 			count++;
-			// console.log("I am here");
 		}
-		// console.log(data_global[i]);
 	}
 
 	// club_data.reverse();
-	console.log(club_data);
 	var radarData = [];
 	var radarDataPrev = [];
 	var Season = [];
@@ -94,23 +91,24 @@ function readClubData(club){
 		if(i != club_data.length-1){
 			radarData.unshift([club_data[i].GA,club_data[i].GS,club_data[i].Passing,club_data[i].Points,club_data[i].Possession, club_data[i].Shooting]);
 			Season.unshift(club_data[i].Year);
+
+			radarDataPrev.unshift([club_data[i+1].GA,club_data[i+1].GS,club_data[i+1].Passing,club_data[i+1].Points,club_data[i+1].Possession, club_data[i+1].Shooting]);
 			if(club_data[i].Rank == -1){
 				rankData.unshift(17);
 			}else{
 				rankData.unshift(club_data[i].Rank);
 			}
 		}
-		if(i != 0){
-			radarDataPrev.unshift([club_data[i].GA,club_data[i].GS,club_data[i].Passing,club_data[i].Points,club_data[i].Possession, club_data[i].Shooting]);
-		}
+		// if(i != club_data){
+		// 	radarDataPrev.unshift([club_data[i+1].GA,club_data[i+1].GS,club_data[i+1].Passing,club_data[i+1].Points,club_data[i+1].Possession, club_data[i+1].Shooting]);
+		// }
 
 
 		costData[i] = club_data[i].Transfer_Arrival-club_data[i].Transfer_Departure;
 	}
-	console.log(radarData);
-	console.log(Season);
 
-
+	console.log("radar: "+radarData)
+	console.log("prev: "+radarDataPrev)
 	drawChartSingle(radarData, radarDataPrev,Season, costData, rankData);
 }
 
@@ -134,9 +132,9 @@ function handleCompare(country){
 		var data = response.data
 		data_global = data
     //
-		console.log(data_global)
+		// console.log(data_global)
 		clubs = readUniqueClubs(data)
-		console.log(clubs);
+		// console.log(clubs);
 		// console.log("hhhh");
 		//var clubs = ['Beijing','Shanghai','Najing','Shandong'];
 
@@ -155,9 +153,9 @@ function writeSelectBox(clubs){
 
 		//Draw select feild for first country
 		printThis+='<div class="field">'
-    printThis+='<label>Country One</label>'
+    printThis+='<label>Club One</label>'
     printThis+='<select id = "c1" class="ui fluid dropdown">';
-		printThis+='<option value="">Country One</option>';
+		printThis+='<option value="">Club One</option>';
     for(var i = 0; i < clubs.length; i++){
         printThis += '<option value ="'+clubs[i]+'">'+clubs[i]+'</option> ';
     }
@@ -166,9 +164,9 @@ function writeSelectBox(clubs){
 
 		//Draw select feild for second country
 		printThis+='<div class="field">'
-    printThis+='<label>Country Two</label>'
+    printThis+='<label>Club Two</label>'
     printThis+='<select id = "c2" class="ui fluid dropdown">';
-		printThis+='<option value="">Country Two</option>';
+		printThis+='<option value="">Club Two</option>';
     for(var i = 0; i < clubs.length; i++){
         printThis += '<option value ="'+clubs[i]+'">'+clubs[i]+'</option> ';
     }
@@ -218,7 +216,7 @@ function compare(){
 			}
 			cost = c1_data[i].Transfer_Arrival-c1_data[i].Transfer_Departure;
 
-			DataC1.unshift([c1_data[i].GA,c1_data[i].GS,c1_data[i].Passing,c1_data[i].Points,c1_data[i].Possession, c1_data[i].Shooting, cost,rank]);
+			DataC1.unshift([c1_data[i].Year,c1_data[i].GA,c1_data[i].GS,c1_data[i].Passing,c1_data[i].Points,c1_data[i].Possession, c1_data[i].Shooting, cost,rank]);
 
 			if(c2_data[i].Rank == -1){
 				rank = 17;
@@ -226,7 +224,7 @@ function compare(){
 				rank = c2_data[i].Rank;
 			}
 			cost = c2_data[i].Transfer_Arrival-c1_data[i].Transfer_Departure;
-			DataC2.unshift([c2_data[i].GA,c2_data[i].GS,c2_data[i].Passing,c2_data[i].Points,c2_data[i].Possession, c2_data[i].Shooting, cost,rank]);
+			DataC2.unshift([c2_data[i].Year,c2_data[i].GA,c2_data[i].GS,c2_data[i].Passing,c2_data[i].Points,c2_data[i].Possession, c2_data[i].Shooting, cost,rank]);
 
 	}
 	// console.log(radarData);
